@@ -2,7 +2,7 @@ import facebook, requests, json
 
 
 
-tokens = json.load(open('tokens.json','rb'))
+tokens = json.load(open('../tokens.json','rb'))
 APP_ID = tokens['id']
 APP_SECRET = tokens['secret'] 
 ACCESS_TOKEN = tokens['long_access_token']
@@ -26,7 +26,7 @@ def action(post):
 # here: https://developers.facebook.com/tools/explorer/
 # Look at Bill Gates's profile for this example by using his Facebook id.
 
-pages = open('inuit-pages').read().splitlines()
+pages = open('../data/inuit-pages').read().splitlines()
 graph = facebook.GraphAPI(ACCESS_TOKEN)
 
 for page in pages:
@@ -34,7 +34,7 @@ for page in pages:
 	posts = graph.get_connections(profile['id'],'posts')
 
 	while True:
-		with open(page,'a') as fid:
+		with open('../data/%s'%page,'a') as fid:
 		    try:
 		        # Perform some action on each post in the collection we receive from
 		        # Facebook.
